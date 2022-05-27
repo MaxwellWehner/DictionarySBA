@@ -18,16 +18,40 @@ fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${word}`)
 			//finds a good word
 			let wordObj = data[0];
 			let wordTitle = document.createElement("h2");
-			let phonetic = document.createElement("span");
+            let phonetic = document.createElement("span");
+			let audioElement = document.createElement("audio");
 			phonetic.innerText = wordObj.phonetic;
+			if (!wordObj.phonetic) {
+				phonetic.innerText = wordObj.phonetics[1].text;
+			}
 			wordTitle.innerText = wordObj.word;
 			wordTitle.style.alignSelf = "flex-start";
 			wordTitle.style.marginLeft = "2%";
+			audioElement.src = wordObj.phonetics[0].audio;
+			if (wordObj.phonetics[0].audio === "") {
+				audioElement.src = wordObj.phonetics[1].audio;
+			}
+
+			phonetic.addEventListener("click", () => {
+				audioElement.play();
+			});
+
 			wordTitle.appendChild(phonetic);
 			main.append(wordTitle);
-			for (let i = 0; i < wordObj.meanings.length; i++) {
+			main.append(audioElement);
+			let meanings = wordObj.meanings;
+			for (let i = 0; i < meanings.length; i++) {
 				let info = document.createElement("div");
-				info.innerHTML = i;
+				let pos = document.createElement("div");
+				pos.innerText = meanings[i].partOfSpeech;
+				pos.id = "pos";
+				info.classList.add("info");
+				info.appendChild(pos);
+				for (let j = 0; j < meanings[i].definitions.length; j++) {
+					let def = document.createElement("div");
+					def.innerText = meanings[i].definitions[j].definition;
+					info.appendChild(def);
+				}
 				main.appendChild(info);
 			}
 			console.log(data);
@@ -52,6 +76,7 @@ fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${word}`)
 			opt2.innerText = "Bad";
 			opt3.value = "Good";
 			opt3.innerText = "Good";
+			opt3.defaultSelected = true;
 			opt4.value = "Amazing";
 			opt4.innerText = "Amazing";
 			submitBtn.type = "submit";
