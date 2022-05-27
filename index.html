@@ -1,12 +1,108 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Weather App</title>
-</head>
-<body>
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Dictonary</title>
+	</head>
+	<style>
+		@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&display=swap");
+		html {
+			height: 100%;
+			font-family: "Montserrat", sans-serif;
+		}
+		body {
+			margin: 0 auto;
+			height: 100%;
+		}
+		header {
+			display: flex;
+			background-color: #eee;
+			height: 5%;
+			align-items: center;
+			justify-content: space-between;
+		}
+		header > div {
+			margin-right: 2%;
+			margin-left: 2%;
+			font-size: 18px;
+		}
 
-</body>
+		.navButton {
+			background-color: #eee;
+			border: none;
+			font-size: 17px;
+		}
+
+		.navButton:hover {
+			color: blue;
+			cursor: pointer;
+			background-color: whitesmoke;
+		}
+
+		#bodyContent {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 50%;
+            align-self: center;
+            height: 75%;
+            margin-top: 5%;
+            background-color: #e9ecef;
+		}
+
+        form{
+            margin-top: 10%;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            width: 100%;
+        }
+
+        input{
+            width:60%;
+            height: 30px;
+        }
+
+        form button{
+            width:30%;
+            height: 30px;
+            margin-top: 3px;
+        }
+
+        img{
+            width: 35%;
+            margin-top: 3%;
+        }
+
+        form > label{
+            margin-bottom: 2%;
+            font-size: 18px;
+        }
+	</style>
+	<body style="display: flex; flex-direction: column;">
+		<header>
+			<div>My Dictonary</div>
+			<div id="navButtons">
+				<button class="navButton" id="homeBtn">Home</button>
+				<button class="navButton" id="aboutBtn">About</button>
+			</div>
+		</header>
+		<div id="bodyContent">
+			<h1>A Good Free Dictionary</h1>
+            <img src="./wordsPic.jpg"/>
+			<form id="wordForm">
+				<label for="input_word">Enter a word to search for</label>
+				<input
+					type="text"
+					id="input_word"
+					placeholder="Enter a word to look up"
+				/>
+                <br/>
+				<button type="submit">Search</button>
+			</form>
+		</div>
+		<script src="index.js"></script>
+	</body>
 </html>
